@@ -22,13 +22,13 @@ class FuncionariosModel {
     }
     */
 
-    registrar = async (funcionarios, res) => {
+    create = async (funcionarios, res) => {
         const {
             idfunc , nome, email, senha, idade, sexo, cargo, imagem
         } = funcionarios.body;
 
        try {
-           const newfunc = await FuncionarioDAO.insert(funcionarios)
+           const newfunc = await FuncionarioDAO.insertFuncionario(funcionarios)
            res.status(201).json(newfunc)
        } catch (error) {
            res.status(500).json(error)
