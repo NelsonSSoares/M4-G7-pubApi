@@ -1,6 +1,6 @@
-const { resolve } = require("path/posix");
+const bcrypt = require("bcrypt");
 const conexao = require("../infra/conexao");
-
+const saltRouns = 10
 class FuncionarioDAO{
 
     constructor(conexao){
@@ -10,6 +10,26 @@ class FuncionarioDAO{
 
     loginFuncionario = (email, senha) => {
 
+        return new Promise((resolve, reject)=>{
+            this.conexao.query("SELECT * FROM funcionarios WHERE email = ? ", email, (err, result) => {
+                if(err){
+                    reject("unexpected error: " + err)
+                }
+                if(result.length > 0){
+                    const idfunc = result[0].idfunc
+    
+                    bcrypt.compare(senha, result[0].senha, (erro, result) => {
+                        if(result){
+                            res.status(200).json({msg: "Usuario logado com sucesso", id: idfunc})
+                        } else {
+                            res.status(401).json({msg: 'senha incorreta'})
+                        }
+                    })
+                } else {
+                    res.status(400).json({msg: "email não encontrado"})
+                }
+            })
+        })    
     }
 
 
