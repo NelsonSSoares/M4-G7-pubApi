@@ -44,7 +44,7 @@ Ou apenas use o comando para iniciar o nodemon.
 npm start
 ```
 Verifique se servidor está ligado na porta 3000.
-Se os passos a cima forem executados com sucesso você poderá fazer seus testes via Insominia ou Postman sem problemas.
+Se os passos acima forem executados com sucesso você poderá fazer seus testes via Insominia ou Postman sem problemas.
 
  # Autores
  
