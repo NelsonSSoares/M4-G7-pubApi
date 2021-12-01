@@ -3,7 +3,8 @@ const Funcionario = require('../models/funcionariosModel');
 module.exports = app => {
 
 
-    app.get("/func/", (req,res)=> {
+    app.get("/func", (req,res)=> {
+        console.log(req)
         Funcionario.selectAll(req, res);
     })
 
@@ -11,21 +12,24 @@ module.exports = app => {
         Funcionario.selectById(req,res)
     })
 
-    app.post("/func/create", (req, res) => {
+    app.post("/func", (req, res) => {
+        console.log(req.body)
         Funcionario.create(req.body, res);
     })
 
-    app.put("/func/update/:id", (req, res) => {
+    app.put("/func/:id", (req, res) => {
         Funcionario.update(req, res);
     })
+
+    app.delete("/func/:id", (req,res)=>{
+        Funcionario.delete(req,res);
+    })
+
 
     app.post("/func/login", (req, res) =>{
         Funcionario.login(req.body, res);
     })
 
-    app.delete("/func/delete/:id", (req,res)=>{
-        Funcionario.delete(req,res);
-    })
-
+    
 
 }
