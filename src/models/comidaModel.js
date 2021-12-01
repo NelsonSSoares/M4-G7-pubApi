@@ -1,4 +1,4 @@
-const comidaDAO = require('../dao/comidaDAO');
+
 const ComidaDAO = require('../dao/comidaDAO');
 class ComidaModel{
 
@@ -49,7 +49,7 @@ class ComidaModel{
     delete = async (req, res) => {
         const {id} = req.params.id;
         try {
-            const result = await comidaDAO.deleteFood(id)
+            const result = await ComidaDAO.deleteFood(id)
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);

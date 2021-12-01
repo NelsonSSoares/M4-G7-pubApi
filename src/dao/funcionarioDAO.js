@@ -3,7 +3,7 @@ const conexao = require("../infra/conexao");
 const saltRouns = 10
 class FuncionarioDAO{
 
-    constructor(){
+    constructor(conexao){
         this.conexao = conexao;
     }
 
@@ -101,14 +101,14 @@ class FuncionarioDAO{
     }// end insert
 
     updateFuncionario = (id, funcionario) =>{
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ? , imagem = ? WHERE idfunc = ? `,
             [ funcionario.nome,
             funcionario.email,
             funcionario.senha,
             funcionario.idade,
             funcionario.sexo,
-            funcionario.cargo,
+            funcionario.cargo],
             id,
             (error, result) =>{
                 if(error){
@@ -116,7 +116,7 @@ class FuncionarioDAO{
                 }else{
                     resolve(result);
                 }
-            })
+            }
         })
     }
 
@@ -136,4 +136,4 @@ class FuncionarioDAO{
 
 
 
-module.exports = new FuncionarioDAO()
+module.exports = new FuncionarioDAO(conexao)
