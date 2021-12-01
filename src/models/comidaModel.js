@@ -23,7 +23,7 @@ class ComidaModel{
 
     create = async (req, res) => {
     
-        const {idcomida, nome, qnt, preco } = req.body;
+        const { nome, qnt, preco } = req.body;
         
         try {
             const newFood = await ComidaDAO.insertFood(req);
