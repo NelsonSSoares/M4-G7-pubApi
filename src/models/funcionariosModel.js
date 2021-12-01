@@ -36,7 +36,7 @@ class FuncionariosModel {
     selectAll = async (req, res) =>{
         try {
             const result = await FuncionarioDAO.selectAllFuncionario();
-            res.send(200).json(result);
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error)
         }
@@ -57,7 +57,7 @@ class FuncionariosModel {
 
     create = async (funcionarios, res) => {
         const {
-            idfunc , nome, email, senha, idade, sexo, cargo, imagem
+            idfunc , nome, email, senha, idade, sexo, cargo
         } = funcionarios.body;
 
        try {
