@@ -5,7 +5,7 @@ class Tabelas {
     }
 
     criarTabelas() {
-   
+
         const tabelas = ['CREATE TABLE IF NOT EXISTS FUNCIONARIOS' +
         '( ' +
             'idfunc int NOT NULL AUTO_INCREMENT, ' +
@@ -26,22 +26,18 @@ class Tabelas {
             'qnt int NOT NULL, '+
             'preco float(4,2) NOT NULL, '+
             'PRIMARY KEY (idcomida)'+
-        '); '/*
+        '); ',
 
-        'CREATE TABLE IF NOT EXISTS mentoria'+
+        'CREATE TABLE IF NOT EXISTS MUSICAS'+
         '( '+
-            'idmentoria int NOT NULL AUTO_INCREMENT, '+
-            'mentorId int NOT NULL, '+
-            'mentoradoId int NOT NULL, '+
-            'PRIMARY KEY (idmentoria), '+
-            'KEY mentorId_idx (mentorId), '+
-            'KEY mentoradoId_idx (mentoradoId), '+
-            'CONSTRAINT mentoradoId FOREIGN KEY (mentoradoId) REFERENCES mentorado (idmentorado), '+
-            'CONSTRAINT mentorId FOREIGN KEY (mentorId) REFERENCES mentor (idmentor) '+
+            'idmusica int NOT NULL AUTO_INCREMENT, '+
+            'nome varchar(200) NOT NULL, '+
+            'artista varchar(200) NOT NULL, '+
+            'album varchar(200) NOT NULL, '+
+            'duracao float(4,2) NOT NULL, '+
+            'PRIMARY KEY (idmusica)'+
           ');'
-        
-          */
-        
+
         ]
 
         tabelas.forEach(sql =>{
