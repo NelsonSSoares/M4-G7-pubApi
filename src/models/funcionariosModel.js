@@ -36,14 +36,14 @@ class FuncionariosModel {
     selectAll = async (req, res) =>{
         try {
             const result = await FuncionarioDAO.selectAllFuncionario();
-            res.send(200).json(result);
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error)
         }
     }
 
     selectById = async (req, res) =>{
-        const {id} = req.params.id;
+        const id = req.params.id;
 
         try {
             const result = await FuncionarioDAO.selectIdFuncionario(id);
@@ -53,12 +53,9 @@ class FuncionariosModel {
         }
     }
 
-    
+
 
     create = async (funcionarios, res) => {
-        const {
-            idfunc , nome, email, senha, idade, sexo, cargo, imagem
-        } = funcionarios.body;
 
        try {
            const newfunc = await FuncionarioDAO.insertFuncionario(funcionarios)
@@ -70,7 +67,7 @@ class FuncionariosModel {
 
     update = async (req, res)=>{
 
-        const {id} = req.params.id;
+        const id = req.params.id;
         const funcionario = req.body;
 
         try {
@@ -83,7 +80,7 @@ class FuncionariosModel {
 
     delete = async (req, res) =>{
 
-        const {id} = req.params.id;
+        const id = req.params.id;
 
         try {
             const result = await FuncionarioDAO.deleteFuncionario(id);
@@ -93,10 +90,10 @@ class FuncionariosModel {
         }
     }
 
-   
+
 
     /*
-    
+
     upload = async (req, res) => {
         parser.single('avatar')(req, res, err => {
             if (err)

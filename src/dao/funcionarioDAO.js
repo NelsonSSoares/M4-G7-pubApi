@@ -3,7 +3,7 @@ const conexao = require("../infra/conexao");
 const saltRouns = 10
 class FuncionarioDAO{
 
-    constructor(conexao){
+    constructor(){
         this.conexao = conexao;
     }
 
@@ -17,7 +17,7 @@ class FuncionarioDAO{
                 }
                 if(result.length > 0){
                     const idfunc = result[0].idfunc
-    
+
                     bcrypt.compare(senha, result[0].senha, (erro, result) => {
                         if(result){
                             res.status(200).json({msg: "Usuario logado com sucesso", id: idfunc})
@@ -29,7 +29,7 @@ class FuncionarioDAO{
                     res.status(400).json({msg: "email não encontrado"})
                 }
             })
-        })    
+        })
     }
 
 
@@ -58,18 +58,18 @@ class FuncionarioDAO{
         })
     }
 
-    insertFuncionario = (newfunc) =>{
+    insertFuncionario = (newfunc) => {
 
         return new Promise((resolve, reject) =>{
-            this.conexao.query(`INSERT INTO FUNCIONARIOS (idfunc , nome, email, senha, idade, sexo, cargo, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-             newfunc.idfunc,
-             newfunc.nome, 
+            this.conexao.query(`INSERT INTO FUNCIONARIOS (nome, email, senha, idade, sexo, cargo, imagem) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+
+             [newfunc.nome,
              newfunc.email,
              newfunc.senha,
              newfunc.idade,
              newfunc.sexo,
              newfunc.cargo,
-             newfunc.imagem,
+             newfunc.imagem],
             (error,result)=>{
                 if(error){
                     reject("Error inserting data into database, could be query error or connection error ERROR: " + error)
@@ -103,22 +103,22 @@ class FuncionarioDAO{
 
     updateFuncionario = (id, funcionario) =>{
         return new Promise((resolve, reject)=>{
-            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ? , imagem = ? WHERE idfunc =? `,
-            funcionario.nome, 
+            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ? , imagem = ? WHERE idfunc = ? `,
+            [ funcionario.nome,
             funcionario.email,
             funcionario.senha,
             funcionario.idade,
             funcionario.sexo,
             funcionario.cargo,
             funcionario.imagem,
-            id,
+            id],
             (error, result) =>{
                 if(error){
                     reject("Error ID not found or your data is not valid, ERROR :" + error)
                 }else{
                     resolve(result);
                 }
-            })        
+            })
         })
     }
 
@@ -138,4 +138,4 @@ class FuncionarioDAO{
 
 
 
-module.exports = new FuncionarioDAO(conexao)
+module.exports = new FuncionarioDAO()
