@@ -15,7 +15,7 @@ module.exports = app => {
         Funcionario.create(req.body, res);
     })
 
-    app.post("/func/update/:id", (req, res) => {
+    app.put("/func/update/:id", (req, res) => {
         Funcionario.update(req, res);
     })
 
@@ -27,5 +27,5 @@ module.exports = app => {
         Funcionario.delete(req,res);
     })
 
-    
+
 }
