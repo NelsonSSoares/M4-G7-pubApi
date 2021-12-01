@@ -15,7 +15,6 @@ class Tabelas {
             'idade int NOT NULL, ' +
             'sexo varchar(1) NOT NULL, ' +
             'cargo varchar(200) NOT NULL, ' +
-            'imagem varchar(250) NOT NULL, ' +
             'PRIMARY KEY (idfunc)' +
         '); ',
 

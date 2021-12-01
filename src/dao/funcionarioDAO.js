@@ -61,7 +61,7 @@ class FuncionarioDAO{
     insertFuncionario = (newfunc) =>{
 
         return new Promise((resolve, reject) =>{
-            this.conexao.query(`INSERT INTO FUNCIONARIOS (idfunc , nome, email, senha, idade, sexo, cargo, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            this.conexao.query(`INSERT INTO FUNCIONARIOS (idfunc , nome, email, senha, idade, sexo, cargo, imagem) VALUES (?, ?, ?, ?, ?, ?, ?)`,
              newfunc.idfunc,
              newfunc.nome, 
              newfunc.email,
@@ -69,7 +69,6 @@ class FuncionarioDAO{
              newfunc.idade,
              newfunc.sexo,
              newfunc.cargo,
-             newfunc.imagem,
             (error,result)=>{
                 if(error){
                     reject("Error inserting data into database, could be query error or connection error ERROR: " + error)
@@ -103,14 +102,13 @@ class FuncionarioDAO{
 
     updateFuncionario = (id, funcionario) =>{
         return new Promise((resolve, reject)=>{
-            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ? , imagem = ? WHERE idfunc =? `,
+            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ?  WHERE idfunc =? `,
             funcionario.nome, 
             funcionario.email,
             funcionario.senha,
             funcionario.idade,
             funcionario.sexo,
             funcionario.cargo,
-            funcionario.imagem,
             id,
             (error, result) =>{
                 if(error){
