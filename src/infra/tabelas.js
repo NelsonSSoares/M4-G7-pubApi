@@ -13,7 +13,7 @@ class Tabelas {
             'email varchar(45) NOT NULL, ' +
             'senha varchar(200) NOT NULL, ' +
             'idade int NOT NULL, ' +
-            'sexo int NOT NULL, ' +
+            'sexo varchar(1) NOT NULL, ' +
             'cargo varchar(200) NOT NULL, ' +
             'imagem varchar(250) NOT NULL, ' +
             'PRIMARY KEY (idfunc)' +
