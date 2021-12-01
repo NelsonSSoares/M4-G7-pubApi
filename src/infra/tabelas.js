@@ -43,7 +43,17 @@ class Tabelas {
             'nome varchar(45) NOT NULL, '+
             'cpf varchar(11) NOT NULL, '+
             'pedidos varchar(255) NOT NULL, '+
-            'PRIMARY KEY (identradas), '+
+            'PRIMARY KEY (identradas) '+
+          ');',
+
+          'CREATE TABLE IF NOT EXISTS DRINKS'+
+        '( '+
+            'iddrinks int NOT NULL AUTO_INCREMENT, '+
+            'tipoBebida varchar(45) NOT NULL, '+
+            'marcaBebida varchar(45) NOT NULL, '+
+            'teorAlcolico float(4,2) NOT NULL, '+
+            'preco float(4,2) NOT NULL, '+
+            'PRIMARY KEY (iddrinks) '+
           ');'
 
 
