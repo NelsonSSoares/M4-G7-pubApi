@@ -17,13 +17,13 @@ class Tabelas {
             'cargo varchar(200) NOT NULL, ' +
             'PRIMARY KEY (idfunc)' +
         '); ',
-
+        
         'CREATE TABLE IF NOT EXISTS COMIDAS' +
         ' ('+
             'idcomida int NOT NULL AUTO_INCREMENT, '+
             'nome varchar(45) NOT NULL, '+
             'qnt int NOT NULL, '+
-            'preco float(4,2) NOT NULL, '+
+            'preco decimal(10,2) NOT NULL, '+
             'PRIMARY KEY (idcomida)'+
         '); ',
 
