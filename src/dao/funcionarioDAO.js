@@ -102,24 +102,14 @@ class FuncionarioDAO{
 
     updateFuncionario = (id, funcionario) =>{
         return new Promise((resolve, reject)=>{
-<<<<<<< HEAD
             this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ? , imagem = ? WHERE idfunc = ? `,
             [ funcionario.nome,
-=======
-            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ?, senha = ? , idade = ?, sexo = ? , cargo = ?  WHERE idfunc =? `,
-            funcionario.nome,
->>>>>>> 306716492772b349e7d13721c8e849e09631f50a
             funcionario.email,
             funcionario.senha,
             funcionario.idade,
             funcionario.sexo,
             funcionario.cargo,
-<<<<<<< HEAD
-            funcionario.imagem,
-            id],
-=======
             id,
->>>>>>> 306716492772b349e7d13721c8e849e09631f50a
             (error, result) =>{
                 if(error){
                     reject("Error ID not found or your data is not valid, ERROR :" + error)
