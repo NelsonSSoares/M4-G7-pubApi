@@ -25,21 +25,18 @@ class Tabelas {
             'qnt int NOT NULL, '+
             'preco float(4,2) NOT NULL, '+
             'PRIMARY KEY (idcomida)'+
-        '); '/*
+        '); ',
 
-        'CREATE TABLE IF NOT EXISTS mentoria'+
+        'CREATE TABLE IF NOT EXISTS ENTRADAS'+
         '( '+
-            'idmentoria int NOT NULL AUTO_INCREMENT, '+
-            'mentorId int NOT NULL, '+
-            'mentoradoId int NOT NULL, '+
-            'PRIMARY KEY (idmentoria), '+
-            'KEY mentorId_idx (mentorId), '+
-            'KEY mentoradoId_idx (mentoradoId), '+
-            'CONSTRAINT mentoradoId FOREIGN KEY (mentoradoId) REFERENCES mentorado (idmentorado), '+
-            'CONSTRAINT mentorId FOREIGN KEY (mentorId) REFERENCES mentor (idmentor) '+
+            'identradas int NOT NULL AUTO_INCREMENT, '+
+            'nome varchar(45) NOT NULL, '+
+            'cpf varchar(11) NOT NULL, '+
+            'pedidos varchar(255) NOT NULL, '+
+            'PRIMARY KEY (identradas), '+
           ');'
         
-          */
+          
         
         ]
 
