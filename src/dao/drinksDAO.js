@@ -70,4 +70,4 @@ class DrinksDAO {
     }
 }
 
-module.exports = new DrinksDAO()
+module.exports = new DrinksDAO(conexao)

@@ -1,7 +1,7 @@
 const conexao = require('../infra/conexao');
 
 class ComidaDAO{
-    constructor(conexao){
+    constructor(){
         this.conexao = conexao;
     }
 

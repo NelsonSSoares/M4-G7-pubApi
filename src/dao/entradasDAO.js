@@ -1,7 +1,7 @@
 const conexao = require('../infra/conexao');
 
 class EntradasDAO{
-    constructor(conexao){
+    constructor(){
         this.conexao = conexao;
     }
 

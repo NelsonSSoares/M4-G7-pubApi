@@ -3,7 +3,7 @@ const conexao = require("../infra/conexao");
 const saltRouns = 10
 class FuncionarioDAO {
 
-    constructor(conexao) {
+    constructor() {
         this.conexao = conexao;
     }
 
