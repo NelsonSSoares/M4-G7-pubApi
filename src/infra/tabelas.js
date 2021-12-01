@@ -43,7 +43,7 @@ class Tabelas {
             'nome varchar(45) NOT NULL, '+
             'cpf varchar(11) NOT NULL, '+
             'pedidos varchar(255) NOT NULL, '+
-            'PRIMARY KEY (identradas), '+
+            'PRIMARY KEY (identradas) '+
           ');'
 
 
