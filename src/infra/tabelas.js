@@ -15,7 +15,6 @@ class Tabelas {
             'idade int NOT NULL, ' +
             'sexo varchar(1) NOT NULL, ' +
             'cargo varchar(200) NOT NULL, ' +
-            'imagem varchar(250) NOT NULL, ' +
             'PRIMARY KEY (idfunc)' +
         '); ',
 
@@ -36,7 +35,18 @@ class Tabelas {
             'album varchar(200) NOT NULL, '+
             'duracao float(4,2) NOT NULL, '+
             'PRIMARY KEY (idmusica)'+
+          ');',
+
+        'CREATE TABLE IF NOT EXISTS ENTRADAS'+
+        '( '+
+            'identradas int NOT NULL AUTO_INCREMENT, '+
+            'nome varchar(45) NOT NULL, '+
+            'cpf varchar(11) NOT NULL, '+
+            'pedidos varchar(255) NOT NULL, '+
+            'PRIMARY KEY (identradas), '+
           ');'
+
+
 
         ]
 
