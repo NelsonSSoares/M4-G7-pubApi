@@ -23,7 +23,7 @@ class Tabelas {
             'idcomida int NOT NULL AUTO_INCREMENT, '+
             'nome varchar(45) NOT NULL, '+
             'qnt int NOT NULL, '+
-            'preco float(4,2) NOT NULL, '+
+            'preco decimal(10,2) NOT NULL, '+
             'PRIMARY KEY (idcomida)'+
         '); '/*
 
