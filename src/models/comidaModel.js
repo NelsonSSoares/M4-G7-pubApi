@@ -1,3 +1,4 @@
+const comidaDAO = require('../dao/comidaDAO');
 const ComidaDAO = require('../dao/comidaDAO');
 class ComidaModel{
 
@@ -21,21 +22,38 @@ class ComidaModel{
     }
 
     create = async (req, res) => {
-        const {idcomida, } = req.body;
-
+    
+        const {idcomida, nome, qnt, preco } = req.body;
+        
         try {
+            const newFood = await ComidaDAO.insertFood(req);
+            res.status(201).json(newFood);
             
         } catch (error) {
-            
+            res.status(500).json(error);
         }
     }
 
     update = async (req, res) => {
+        const {id} = req.params.id;
+        const comida = req.body;
 
+        try {
+            const result = await ComidaDAO.updateFood(id,comida)
+            res.status(204).json(result)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 
     delete = async (req, res) => {
-        
+        const {id} = req.params.id;
+        try {
+            const result = await comidaDAO.deleteFood(id)
+            res.status(200).json(result);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 
 }

@@ -17,7 +17,7 @@ class Tabelas {
             'cargo varchar(200) NOT NULL, ' +
             'PRIMARY KEY (idfunc)' +
         '); ',
-
+        
         'CREATE TABLE IF NOT EXISTS COMIDAS' +
         ' ('+
             'idcomida int NOT NULL AUTO_INCREMENT, '+
