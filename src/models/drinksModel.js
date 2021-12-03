@@ -1,10 +1,10 @@
-const MusicasDAO = require('../dao/musicasDAO')
+const DrinksDAO = require('../dao/drinksDAO')
 
-class MusicasModel {
+class DrinksModel {
 
     selectAll = async (req, res) => {
         try {
-            const result = await MusicasDAO.selectAllMusicas()
+            const result = await DrinksDAO.selectAllDrinks()
             res.status(200).json(result)
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -15,21 +15,21 @@ class MusicasModel {
         const id = req.params.id
 
         try {
-            const result = await MusicasDAO.selectMusicaByID(id)
+            const result = await DrinksDAO.selectDrinksByID(id)
 
             if (result) {
                 res.status(200).json(result)
             } else {
-                res.status(404).json({msg: 'Música não encontrada.'})
+                res.status(404).json({msg: 'Drinks não encontrado.'})
             }
         } catch (error) {
             res.status(500).json({ erro: error })
         }
     }
 
-    create = async (musica, res) => {
+    create = async (drinks, res) => {
         try {
-            const result = await MusicasDAO.insertMusica(musica)
+            const result = await DrinksDAO.insertDrinks(drinks)
             res.status(201).json({ msg: result })
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -38,15 +38,16 @@ class MusicasModel {
 
     update = async (req, res) => {
         const id = req.params.id
+        const drinks = req.body
 
         try {
-            const musica = await MusicasDAO.selectMusicaByID(id)
+            const drinks = await DrinksDAO.selectDrinksByID(id)
 
-            if (musica) {
-                const result = await MusicasDAO.updateMusica(id, req.body)
+            if (drinks) {
+                const result = await DrinksDAO.updateDrinks(id, drinks)
                 res.status(200).json({ msg: result })
             } else {
-                res.status(404).json({msg: 'Música não encontrada.'})
+                res.status(404).json({msg: 'Drinks não encontrado.'})
             }
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -57,13 +58,13 @@ class MusicasModel {
         const id = req.params.id
 
         try {
-            const musica = await MusicasDAO.selectMusicaByID(id)
+            const drinks = await DrinksDAO.selectDrinksByID(id)
 
-            if (musica) {
-                const result = await MusicasDAO.deleteMusica(id)
+            if (drinks) {
+                const result = await DrinksDAO.deleteDrinks(id)
                 res.status(200).json({ msg: result })
             } else {
-                res.status(404).json({ msg: 'Música não encontrada.' })
+                res.status(404).json({ msg: 'Drinks não encontrado.' })
             }
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -71,4 +72,4 @@ class MusicasModel {
     }
 }
 
-module.exports = new MusicasModel()
+module.exports = new DrinksModel()

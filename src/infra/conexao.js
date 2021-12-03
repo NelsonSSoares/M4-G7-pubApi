@@ -1,11 +1,11 @@
 const mysql = require('mysql')
 
 const conexao = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'us-cdbr-east-04.cleardb.com',
     port: 3306,
-    user: 'root2',
-    password: '',
-    database: 'pubapi'
+    user: 'b6c96bad485f13',
+    password: '2ff13bf7',
+    database: 'heroku_51b842185d16c1c'
 })
 
 module.exports = conexao

@@ -11,17 +11,15 @@ module.exports = app => {
        Entradas.selectById(req,res)
     })
 
-    app.post("/entradas/create", (req, res) => {
+    app.post("/entradas", (req, res) => {
        Entradas.create(req.body, res);
     })
 
-    app.post("/entradas/update/:id", (req, res) => {
+    app.put("/entradas/:id", (req, res) => {
        Entradas.update(req, res);
     })
 
-    app.delete("/entradas/delete/:id", (req,res)=>{
+    app.delete("/entradas/:id", (req,res)=>{
         Entradas.delete(req,res);
     })
-
-    
 }
