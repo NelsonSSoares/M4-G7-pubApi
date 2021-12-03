@@ -9,9 +9,8 @@ class FuncionarioDAO {
 
 
     loginFuncionario = (email, senha) => {
-
         return new Promise((resolve, reject) => {
-            this.conexao.query("SELECT * FROM funcionarios WHERE email = ? ", email, (err, result) => {
+            this.conexao.query("SELECT * FROM FUNCIONARIOS WHERE email = ? ", email, (err, result) => {
                 if (err) {
                     reject("unexpected error: " + err)
                 }
@@ -20,13 +19,13 @@ class FuncionarioDAO {
 
                     bcrypt.compare(senha, result[0].senha, (erro, result) => {
                         if (result) {
-                            res.status(200).json({ msg: "Usuario logado com sucesso", id: idfunc })
+                            resolve({ msg: "Usuario logado com sucesso", id: idfunc })
                         } else {
-                            res.status(401).json({ msg: 'senha incorreta' })
+                            reject({ msg: 'senha incorreta' })
                         }
                     })
                 } else {
-                    res.status(400).json({ msg: "email não encontrado" })
+                    reject({ msg: "email não encontrado" })
                 }
             })
         })
@@ -37,7 +36,7 @@ class FuncionarioDAO {
         return new Promise((resolve, reject) => {
             this.conexao.query(`SELECT * FROM FUNCIONARIOS`, (error, result) => {
                 if (error) {
-                    reject("cannot return data from database");
+                    reject("Não foi possível listar funcionários");
                 } else {
                     resolve(result);
                 }
@@ -50,7 +49,7 @@ class FuncionarioDAO {
             this.conexao.query(`SELECT * FROM FUNCIONARIOS WHERE idfunc = ?`, id,
                 (error, result) => {
                     if (error) {
-                        reject("ID not found, unknown error occurred during runtime")
+                        reject("Não foi possível encontrar funcionários")
                     } else {
                         resolve(result)
                     }
@@ -59,49 +58,30 @@ class FuncionarioDAO {
     }
 
     insertFuncionario = (newfunc) => {
-
         return new Promise((resolve, reject) => {
-            this.conexao.query(`INSERT INTO FUNCIONARIOS ( ,nome, email, senha, idade, sexo, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [,newfunc.nome,
-                newfunc.email,
-                newfunc.senha,
-                newfunc.idade,
-                newfunc.sexo,
-                newfunc.cargo,
-                ],
-                (error, result) => {
-                    if (error) {
-                        reject("Error inserting data into database, could be query error or connection error ERROR: " + error)
-                    } else {
-                        resolve("Employee created successfully" + result)
-                    }
-                })
-        })
 
-        /*
-        conexao.query("SELECT * FROM FUNCIONARIOS WHERE email = ?", [email], (err, result) => {
-            if(err){
-                res.send(err)
-            }
-            if(result.length == 0){
-                bcrypt.hash(senha, saltRouns, (err, hash) => {
-                    conexao.query("INSERT INTO FUNCIONARIOS (idfunc , nome, email, senha, idade, sexo, cargo, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [idfunc , nome, email, senha, idade, sexo, cargo, imagem], (err, response) => {
-                        if(err){
-                            res.send(err)
-                        }
-                        res.send({msg: 'cadastrado com sucesso'})
+            this.conexao.query("SELECT * FROM FUNCIONARIOS WHERE email = ?", [newfunc.email], (err, result) => {
+                if(err){
+                    res.send(err)
+                }
+                if(result.length == 0){
+                    bcrypt.hash(newfunc.senha, saltRouns, (err, hash) => {
+                        conexao.query("INSERT INTO FUNCIONARIOS (nome, email, senha, idade, sexo, cargo) VALUES (?, ?, ?, ?, ?, ?)", [newfunc.nome, newfunc.email, hash, newfunc.idade, newfunc.sexo, newfunc.cargo], (err, response) => {
+                            if(err){
+                                reject(err)
+                            }
+                            resolve({msg: 'cadastrado com sucesso'})
+                        })
                     })
-                })
-
-            } else {
-                res.send({msg: 'email já existente'})
-            }
+                } else {
+                    reject({msg: 'email já existente'})
+                }
+            })
         })
-        */
-    }// end insert
+    }
 
 
-    upadateFuncionario = (id, funcionario) =>{
+    updateFuncionario = (id, funcionario) =>{
         return new Promise((resolve, reject) => {
             this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ? , senha = ? , idade =? , sexo = ?, cargo = ? WHERE idfunc = ?  `,
                 [funcionario.nome,
@@ -113,22 +93,21 @@ class FuncionarioDAO {
                 id],
                 (error, result) => {
                     if (error) {
-                        reject("Error ID not found or your data is not valid, ERROR :" + error)
+                        reject("Não foi possível realizar a atualização")
                     } else {
                         resolve(result);
                     }
                 }
 
-            )          
+            )
         })
     }
-
 
     deleteFuncionario = (id) => {
         return new Promise((resolve, reject) => {
             this.conexao.query(`DELETE FROM FUNCIONARIOS WHERE idfunc = ?`, id, (error) => {
                 if (error) {
-                    reject("Incorrect ID or occurried a fatal error occurred during run time, Error: " + error)
+                    reject("Não foi possível deletar funcionário")
                 } else {
                     resolve(true)
                 }
@@ -136,8 +115,6 @@ class FuncionarioDAO {
         })
     }
 
-}// end class
+}
 
-
-
-module.exports = new FuncionarioDAO(conexao)
+module.exports = new FuncionarioDAO()

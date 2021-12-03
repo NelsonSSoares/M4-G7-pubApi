@@ -13,7 +13,6 @@ module.exports = app => {
     })
 
     app.post("/func", (req, res) => {
-        console.log(req.body)
         Funcionario.create(req.body, res);
     })
 
@@ -25,11 +24,10 @@ module.exports = app => {
         Funcionario.delete(req,res);
     })
 
-
     app.post("/func/login", (req, res) =>{
         Funcionario.login(req.body, res);
     })
 
-    
+
 
 }

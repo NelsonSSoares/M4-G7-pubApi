@@ -16,7 +16,7 @@ class ComidaDAO{
             })
         })
     }
-    
+
     selectFoodById(id){
         return new Promise((resolve, reject) => {
             this.conexao.query(`SELECT * FROM COMIDAS WHERE idcomida = ?`, id,
@@ -29,10 +29,10 @@ class ComidaDAO{
             })
         })
     }
-    
+
     insertFood(comida){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`INSERT INTO COMIDAS (,nome, qnt, preco) VALUES (?, ?, ?)`, [ ,comida.nome, comida.qnt, comida.preco ],
+            this.conexao.query(`INSERT INTO COMIDAS (nome, qnt, preco) VALUES (?, ?, ?)`, [comida.nome, comida.qnt, comida.preco ],
                 (error) => {
                     if (error) {
                         reject('Error inserting food: ' + error);
@@ -44,8 +44,9 @@ class ComidaDAO{
     }
 
     updateFood(id, comida){
+        console.log(id)
         return new Promise((resolve, reject) => {
-            this.conexao.query(`UPDATE COMIDAS SET nome = ?, qnt = ? , preco =?  WHERE idcomida = ?`, [ comida.nome, comida.qnt, comida.preco, id ],
+            this.conexao.query(`UPDATE COMIDAS SET nome = ?, qnt = ? , preco = ?  WHERE idcomida = ?`, [ comida.nome, comida.qnt, comida.preco, id ],
             (error) => {
                 if (error) {
                     reject('error when updating registration: ' + error)
