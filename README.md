@@ -36,7 +36,8 @@ Se os passos acima forem executados com sucesso você poderá fazer seus testes 
 
 ## Documentação
 
-Para mais informações, consulte o seguinte link:
+Para mais informações, consulte os seguintes link:
+* [Apresentação](https://www.canva.com/design/DAExUE-Q-Oc/NLSaDiUAUuUWywJQ5xu8Lw/view?utm_content=DAExUE-Q-Oc&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
 * [Documentação da API](https://documenter.getpostman.com/view/18554886/UVJhCZwa)
  
  # Autores
