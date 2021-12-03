@@ -4,7 +4,6 @@ module.exports = app => {
 
 
     app.get("/comidas", (req,res)=> {
-        console.log(req)
         Comidas.selectAll(req, res);
     })
 
@@ -16,7 +15,7 @@ module.exports = app => {
         Comidas.create(req.body, res);
     })
 
-    app.post("/comidas/:id", (req, res) => {
+    app.put("/comidas/:id", (req, res) => {
         Comidas.update(req, res);
     })
 
@@ -24,5 +23,5 @@ module.exports = app => {
         Comidas.delete(req,res);
     })
 
-    
+
 }

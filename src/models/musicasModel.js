@@ -38,13 +38,12 @@ class MusicasModel {
 
     update = async (req, res) => {
         const id = req.params.id
-        const funcionario = req.body
 
         try {
             const musica = await MusicasDAO.selectMusicaByID(id)
 
             if (musica) {
-                const result = await MusicasDAO.updateMusica(id, funcionario)
+                const result = await MusicasDAO.updateMusica(id, req.body)
                 res.status(200).json({ msg: result })
             } else {
                 res.status(404).json({msg: 'Música não encontrada.'})
