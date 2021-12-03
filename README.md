@@ -4,25 +4,13 @@
 
 Projeto de encerramento do módulo 4 da Resilia Educação com a finalidade de construir uma API definindo suas entidades e atributos.
 
-### * **Pré Requisitos** 
+###  **Pré Requisitos** 
 
-Ter o Node e MySQL instalados no seu computador.
+Ter Node.js e MySQL instalados no seu computador.
 
-### * **Instalação das dependências** 
+###  **Instalação das dependências** 
 
-Instalar o Express - Framework utilizado para criar as rotas da aplicação.
-
-```jsx
-npm install express
-```
-
-Instalar o Nodemon - Ele é uma ferramenta que ajuda a desenvolver aplicativos baseados em node.js
-
-```jsx
-npm install nodemon --save-dev
-```
-
-# ** Rotas possíveis 
+# Entidades: 
 - Comidas
 - Drinks
 - Entradas
@@ -31,25 +19,30 @@ npm install nodemon --save-dev
 
 ## Como executar o projeto
 
-*inicie instalando e executando as dependências
+Rodar o seguinte comando
 
-Após ter instalado todas as dependencias, rode apenas o arquivo "index.js" na pasta src
+```jsx
+npm i
+```
+
+Após a instalação de todas as dependencias, rodar o arquivo "index.js" na pasta src
 
 ```jsx
 node ./src/index.js
 ```
-Ou apenas use o comando para iniciar o nodemon.
 
-```jsx
-npm start
-```
-Verifique se servidor está ligado na porta 3000.
+Verifique se o servidor está ligado na porta 3001.
 Se os passos acima forem executados com sucesso você poderá fazer seus testes via Insominia ou Postman sem problemas.
 
+## Documentação
+
+Para mais informações, consulte o seguinte link:
+* [Documentação da API](https://documenter.getpostman.com/view/18554886/UVJhCZwa)
+ 
  # Autores
  
  #### Bárbara Cruz
- https://www.linkedin.com/in/b%C3%A1rbara-cruz-228552199/
+ https://www.linkedin.com/in/bárbara-cruz-228552199
  #### Débora Figueiredo
  https://www.linkedin.com/in/debora-figueiredo-305743133/
  #### Natasha Miele
