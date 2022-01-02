@@ -5,10 +5,10 @@ class FuncionariosModel {
         const senha = funcionarios.senha
 
         try {
-            const resultlog = await FuncionarioDAO.loginFuncionario(email, senha)
-            res.status(200).json(resultlog)
+            const result = await FuncionarioDAO.loginFuncionario(email, senha)
+            res.status(200).json({msg: 'Login realizado com sucesso'})
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({msg: 'Erro ao realizar login' + error})
         }
     }
 
@@ -17,7 +17,7 @@ class FuncionariosModel {
             const result = await FuncionarioDAO.selectAllFuncionario();
             res.status(200).json(result);
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({msg: 'Erro ao realizar login' + error})
         }
     }
 
@@ -28,7 +28,7 @@ class FuncionariosModel {
             const result = await FuncionarioDAO.selectIdFuncionario(id);
             res.status(200).json(result)
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({msg: 'Funcionário não encontrado' + error})
         }
     }
 
@@ -37,10 +37,10 @@ class FuncionariosModel {
     create = async (funcionarios, res) => {
 
        try {
-           const newfunc = await FuncionarioDAO.insertFuncionario(funcionarios)
-           res.status(201).json(newfunc)
+           const result = await FuncionarioDAO.insertFuncionario(funcionarios)
+           res.status(201).json(result)
        } catch (error) {
-           res.status(500).json(error)
+           res.status(500).json({msg: 'Erro ao cadastrar funcionário' + error})
        }
     }
 
@@ -51,9 +51,9 @@ class FuncionariosModel {
 
         try {
             const result = await FuncionarioDAO.updateFuncionario(id, funcionario)
-            res.status(204).json(result)
+            res.status(200).json({ msg: "Funcionário atualizado com sucesso." })
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({ msg: "Erro ao atualizar funcionario" + error})
         }
     }
 
@@ -63,9 +63,9 @@ class FuncionariosModel {
 
         try {
             const result = await FuncionarioDAO.deleteFuncionario(id);
-            res.status(200).json(result)
+            res.status(200).json({ msg: "Funcionário excluído com sucesso." })
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({msg: 'Erro ao deletar funcionário' + error})
         }
     }
 

@@ -1,14 +1,14 @@
-# Projeto Módulo 4 CRUD-API 
+# Projeto Módulo 4 CRUD-API
 
 # Sobre o projeto
 
 Projeto de encerramento do módulo 4 da Resilia Educação com a finalidade de construir uma API definindo suas entidades e atributos.
 
-### * **Pré Requisitos** 
+### * **Pré Requisitos**
 
 Ter o Node e MySQL instalados no seu computador.
 
-### * **Instalação das dependências** 
+### * **Instalação das dependências**
 
 Instalar o Express - Framework utilizado para criar as rotas da aplicação.
 
@@ -22,9 +22,9 @@ Instalar o Nodemon - Ele é uma ferramenta que ajuda a desenvolver aplicativos b
 npm install nodemon --save-dev
 ```
 
-# ** Rotas possíveis 
+# ** Rotas possíveis
 - Comidas
-- Drinks
+- Bebidas
 - Entradas
 - Músicas
 - Funcionários
@@ -47,7 +47,7 @@ Verifique se servidor está ligado na porta 3000.
 Se os passos acima forem executados com sucesso você poderá fazer seus testes via Insominia ou Postman sem problemas.
 
  # Autores
- 
+
  #### Bárbara Cruz
  https://www.linkedin.com/in/b%C3%A1rbara-cruz-228552199/
  #### Débora Figueiredo

@@ -10,16 +10,16 @@ class FuncionarioDAO {
 
     loginFuncionario = (email, senha) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query("SELECT * FROM FUNCIONARIOS WHERE email = ? ", email, (err, result) => {
+            this.conexao.query("SELECT * FROM funcionarios WHERE email = ? ", email, (err, result) => {
                 if (err) {
                     reject("unexpected error: " + err)
                 }
                 if (result.length > 0) {
-                    const idfunc = result[0].idfunc
+                    const id = result[0].id
 
                     bcrypt.compare(senha, result[0].senha, (erro, result) => {
                         if (result) {
-                            resolve({ msg: "Usuario logado com sucesso", id: idfunc })
+                            resolve({ msg: "Usuário logado com sucesso", id: id })
                         } else {
                             reject({ msg: 'senha incorreta' })
                         }
@@ -34,7 +34,7 @@ class FuncionarioDAO {
 
     selectAllFuncionario = () => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM FUNCIONARIOS`, (error, result) => {
+            this.conexao.query(`SELECT * FROM funcionarios`, (error, result) => {
                 if (error) {
                     reject("Não foi possível listar funcionários");
                 } else {
@@ -46,10 +46,10 @@ class FuncionarioDAO {
 
     selectIdFuncionario = (id) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM FUNCIONARIOS WHERE idfunc = ?`, id,
+            this.conexao.query(`SELECT * FROM funcionarios WHERE id = ?`, id,
                 (error, result) => {
                     if (error) {
-                        reject("Não foi possível encontrar funcionários")
+                        reject("Não foi possível encontrar funcionário")
                     } else {
                         resolve(result)
                     }
@@ -60,13 +60,13 @@ class FuncionarioDAO {
     insertFuncionario = (newfunc) => {
         return new Promise((resolve, reject) => {
 
-            this.conexao.query("SELECT * FROM FUNCIONARIOS WHERE email = ?", [newfunc.email], (err, result) => {
+            this.conexao.query("SELECT * FROM funcionarios WHERE email = ?", [newfunc.email], (err, result) => {
                 if(err){
                     res.send(err)
                 }
                 if(result.length == 0){
                     bcrypt.hash(newfunc.senha, saltRouns, (err, hash) => {
-                        conexao.query("INSERT INTO FUNCIONARIOS (nome, email, senha, idade, sexo, cargo) VALUES (?, ?, ?, ?, ?, ?)", [newfunc.nome, newfunc.email, hash, newfunc.idade, newfunc.sexo, newfunc.cargo], (err, response) => {
+                        conexao.query("INSERT INTO funcionarios (nome, cargo, cpf, email, senha) VALUES (?, ?, ?, ?, ?)", [newfunc.nome, newfunc.cargo, newfunc.cpf, newfunc.email, hash], (err, response) => {
                             if(err){
                                 reject(err)
                             }
@@ -83,29 +83,30 @@ class FuncionarioDAO {
 
     updateFuncionario = (id, funcionario) =>{
         return new Promise((resolve, reject) => {
-            this.conexao.query(`UPDATE FUNCIONARIOS SET nome = ? , email = ? , senha = ? , idade =? , sexo = ?, cargo = ? WHERE idfunc = ?  `,
-                [funcionario.nome,
-                funcionario.email,
-                funcionario.senha,
-                funcionario.idade,
-                funcionario.sexo,
-                funcionario.cargo,
-                id],
-                (error, result) => {
-                    if (error) {
-                        reject("Não foi possível realizar a atualização")
-                    } else {
-                        resolve(result);
+            bcrypt.hash(funcionario.senha, saltRouns, (err, hash) => {
+                this.conexao.query(`UPDATE funcionarios SET nome = ? , cargo = ? , cpf = ? , email =? , senha = ? WHERE id = ?  `,
+                    [funcionario.nome,
+                    funcionario.cargo,
+                    funcionario.cpf,
+                    funcionario.email,
+                    hash,
+                    id],
+                    (error, result) => {
+                        if (error) {
+                            reject("Não foi possível realizar a atualização")
+                        } else {
+                            resolve("Funcionário alterado com sucesso.");
+                        }
                     }
-                }
 
-            )
+                )
+            })
         })
     }
 
     deleteFuncionario = (id) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`DELETE FROM FUNCIONARIOS WHERE idfunc = ?`, id, (error) => {
+            this.conexao.query(`DELETE FROM funcionarios WHERE id = ?`, id, (error) => {
                 if (error) {
                     reject("Não foi possível deletar funcionário")
                 } else {

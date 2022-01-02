@@ -1,10 +1,10 @@
-const EntradasDAO = require('../dao/EntradasDAO')
+const BebidasDAO = require('../dao/bebidasDAO')
 
-class EntradasModel {
+class bebidasModel {
 
     selectAll = async (req, res) => {
         try {
-            const result = await EntradasDAO.selectAllEntradas()
+            const result = await BebidasDAO.selectAllBebidas()
             res.status(200).json(result)
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -15,21 +15,21 @@ class EntradasModel {
         const id = req.params.id
 
         try {
-            const result = await EntradasDAO.selectEntradaByID(id)
+            const result = await BebidasDAO.selectBebidasByID(id)
 
             if (result) {
                 res.status(200).json(result)
             } else {
-                res.status(404).json({msg: 'Entrada não encontrada.'})
+                res.status(404).json({msg: 'Bebida não encontrada.'})
             }
         } catch (error) {
             res.status(500).json({ erro: error })
         }
     }
 
-    create = async (entrada, res) => {
+    create = async (bebidas, res) => {
         try {
-            const result = await EntradasDAO.insertEntrada(entrada)
+            const result = await BebidasDAO.insertBebidas(bebidas)
             res.status(201).json({ msg: result })
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -38,15 +38,16 @@ class EntradasModel {
 
     update = async (req, res) => {
         const id = req.params.id
+        const bebidas = req.body
 
         try {
-            const entrada = await EntradasDAO.selectEntradaByID(id)
+            const bebida = await BebidasDAO.selectBebidasByID(id)
 
-            if (entrada) {
-                const result = await EntradasDAO.updateEntrada(id, req.body)
+            if (bebida) {
+                const result = await BebidasDAO.updateBebidas(id, bebidas)
                 res.status(200).json({ msg: result })
             } else {
-                res.status(404).json({msg: 'Entrada não encontrada.'})
+                res.status(404).json({msg: 'Bebida não encontrada.'})
             }
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -57,13 +58,13 @@ class EntradasModel {
         const id = req.params.id
 
         try {
-            const entrada = await EntradasDAO.selectEntradaByID(id)
+            const bebidas = await BebidasDAO.selectBebidasByID(id)
 
-            if (entrada) {
-                const result = await EntradasDAO.deleteEntrada(id)
+            if (bebidas) {
+                const result = await BebidasDAO.deleteBebidas(id)
                 res.status(200).json({ msg: result })
             } else {
-                res.status(404).json({ msg: 'Entrada não encontrada.' })
+                res.status(404).json({ msg: 'Bebida não encontrada.' })
             }
         } catch (error) {
             res.status(500).json({ erro: error })
@@ -71,4 +72,4 @@ class EntradasModel {
     }
 }
 
-module.exports = new EntradasModel()
+module.exports = new bebidasModel()

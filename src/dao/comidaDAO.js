@@ -5,11 +5,11 @@ class ComidaDAO{
         this.conexao = conexao;
     }
 
-    selectAllFood(){
+    selectAllComida(){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM COMIDAS`, (error, result) => {
+            this.conexao.query(`SELECT * FROM comidas`, (error, result) => {
                 if (error) {
-                    reject('Unable to load food list.');
+                    reject('Erro ao listar');
                 } else {
                     resolve(result);
                 }
@@ -17,12 +17,12 @@ class ComidaDAO{
         })
     }
 
-    selectFoodById(id){
+    selectComidaById(id){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM COMIDAS WHERE idcomida = ?`, id,
+            this.conexao.query(`SELECT * FROM comidas WHERE idcomida = ?`, id,
             (error,result) => {
                 if (error) {
-                    reject('food not found');
+                    reject('Comida não encontrada');
                 } else {
                     resolve(result[0]);
                 }
@@ -30,40 +30,41 @@ class ComidaDAO{
         })
     }
 
-    insertFood(comida){
+    insertComida(comida){
+        console.log(comida)
         return new Promise((resolve, reject) => {
-            this.conexao.query(`INSERT INTO COMIDAS (nome, qnt, preco) VALUES (?, ?, ?)`, [comida.nome, comida.qnt, comida.preco ],
+            this.conexao.query(`INSERT INTO comidas (nome, descricao, preco, imagem) VALUES (?, ?, ?, ?)`, [comida.nome, comida.descricao, comida.preco, comida.imagem ],
                 (error) => {
                     if (error) {
-                        reject('Error inserting food: ' + error);
+                        reject('Erro ao cadastrar: ' + error);
                     } else {
-                        resolve('food successfully registered');
+                        resolve('Comida cadastrada com sucesso');
                     }
                 })
         })
     }
 
-    updateFood(id, comida){
+    updateComida(id, comida){
         console.log(id)
         return new Promise((resolve, reject) => {
-            this.conexao.query(`UPDATE COMIDAS SET nome = ?, qnt = ? , preco = ?  WHERE idcomida = ?`, [ comida.nome, comida.qnt, comida.preco, id ],
+            this.conexao.query(`UPDATE comidas SET nome = ? , preco = ?, descricao = ?, imagem = ?  WHERE id = ?`, [ comida.nome, comida.descricao, comida.preco, comida.imagem, id  ],
             (error) => {
                 if (error) {
-                    reject('error when updating registration: ' + error)
+                    reject('Erro ao atualizar: ' + error)
                 } else {
-                    resolve('food successfully updated')
+                    resolve('Comida atualizada com sucesso')
                 }
             })
         })
     }
 
-    deleteFood(id){
+    deleteComida(id){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`DELETE FROM COMIDAS WHERE idcomida = ?`, id , (error) => {
+            this.conexao.query(`DELETE FROM comidas WHERE idcomida = ?`, id , (error) => {
                 if (error) {
-                    reject('Could not delete food: ' + error)
+                    reject('Erro ao deletar: ' + error)
                 } else {
-                    resolve('food deleted successfully.')
+                    resolve('Comida deletada com sucesso.')
                 }
             })
         })

@@ -20,7 +20,7 @@ class MusicasDAO {
 
     selectMusicaByID  = (id) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM MUSICAS WHERE idmusica = ?`, id,
+            this.conexao.query(`SELECT * FROM MUSICAS WHERE id = ?`, id,
             (error,result) => {
                 if (error) {
                     reject('Música não encontrada')
@@ -33,7 +33,7 @@ class MusicasDAO {
 
     insertMusica = (musica) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`INSERT INTO MUSICAS (nome, artista, album, duracao) VALUES (?, ?, ?, ?)`, [ musica.nome, musica.artista, musica.album, musica.duracao ],
+            this.conexao.query(`INSERT INTO musicas (nome, artista, album) VALUES (?, ?, ?)`, [ musica.nome, musica.artista, musica.album ],
                 (error) => {
                     if (error) {
                         reject('Erro ao inserir a música: ' + error)
@@ -46,7 +46,7 @@ class MusicasDAO {
 
     updateMusica = (id, musica) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`UPDATE MUSICAS SET nome = ?, artista = ?, album = ?, duracao = ? WHERE idmusica = ?`, [ musica.nome, musica.artista, musica.album, musica.duracao, id ],
+            this.conexao.query(`UPDATE musicas SET nome = ?, artista = ?, album = ?, duracao = ? WHERE id = ?`, [ musica.nome, musica.artista, musica.album, id ],
             (error) => {
                 if (error) {
                     reject('Erro ao atualizar o cadastrado: ' + error)
@@ -59,7 +59,7 @@ class MusicasDAO {
 
     deleteMusica = (id) => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`DELETE FROM MUSICAS WHERE idmusica = ?`, id , (error) => {
+            this.conexao.query(`DELETE FROM musicas WHERE id = ?`, id , (error) => {
                 if (error) {
                     reject('Não foi possível excluir a música: ' + error)
                 } else {

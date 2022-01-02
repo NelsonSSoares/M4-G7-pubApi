@@ -6,58 +6,82 @@ class Tabelas {
 
     criarTabelas() {
 
-        const tabelas = ['CREATE TABLE IF NOT EXISTS FUNCIONARIOS' +
+        const tabelas = ['CREATE TABLE IF NOT EXISTS funcionarios' +
         '( ' +
-            'idfunc int NOT NULL AUTO_INCREMENT, ' +
+            'id int NOT NULL AUTO_INCREMENT, ' +
             'nome varchar(45) NOT NULL, ' +
+            'cargo varchar(200) NOT NULL, ' +
+            'cpf varchar(11) NOT NULL, ' +
             'email varchar(45) NOT NULL, ' +
             'senha varchar(200) NOT NULL, ' +
-            'idade int NOT NULL, ' +
-            'sexo varchar(1) NOT NULL, ' +
-            'cargo varchar(200) NOT NULL, ' +
-            'PRIMARY KEY (idfunc)' +
-        '); ',
-        
-        'CREATE TABLE IF NOT EXISTS COMIDAS' +
-        ' ('+
-            'idcomida int NOT NULL AUTO_INCREMENT, '+
-            'nome varchar(45) NOT NULL, '+
-            'qnt int NOT NULL, '+
-            'preco decimal(10,2) NOT NULL, '+
-            'PRIMARY KEY (idcomida)'+
+            'PRIMARY KEY (id)' +
         '); ',
 
-        'CREATE TABLE IF NOT EXISTS MUSICAS'+
+        'CREATE TABLE IF NOT EXISTS comidas' +
+        ' ('+
+            'id int NOT NULL AUTO_INCREMENT, '+
+            'nome varchar(45) NOT NULL, '+
+            'descricao varchar(200),' +
+            'preco float(4,2) NOT NULL, '+
+            'imagem text, ' +
+            'PRIMARY KEY (id)'+
+        '); ',
+
+        'CREATE TABLE IF NOT EXISTS musicas'+
         '( '+
-            'idmusica int NOT NULL AUTO_INCREMENT, '+
+            'id int NOT NULL AUTO_INCREMENT, '+
             'nome varchar(200) NOT NULL, '+
             'artista varchar(200) NOT NULL, '+
             'album varchar(200) NOT NULL, '+
-            'duracao float(4,2) NOT NULL, '+
-            'PRIMARY KEY (idmusica)'+
+            'PRIMARY KEY (id)'+
           ');',
 
-        'CREATE TABLE IF NOT EXISTS ENTRADAS'+
+        'CREATE TABLE IF NOT EXISTS comandas'+
         '( '+
-            'identradas int NOT NULL AUTO_INCREMENT, '+
+            'id int NOT NULL AUTO_INCREMENT, '+
+            'numero varchar(45) NOT NULL, '+
+            'idFuncionario int, '+
+            'PRIMARY KEY (id), '+
+            'CONSTRAINT FK_comandasFuncionarios FOREIGN KEY (idFuncionario)' +
+            'REFERENCES funcionarios(id)' +
+          ');',
+
+          'CREATE TABLE IF NOT EXISTS bebidas'+
+        '( '+
+            'id int NOT NULL AUTO_INCREMENT, '+
             'nome varchar(45) NOT NULL, '+
-            'cpf varchar(11) NOT NULL, '+
-            'pedidos varchar(255) NOT NULL, '+
-            'PRIMARY KEY (identradas) '+
+            'tipo varchar(45) NOT NULL, '+
+            'marca varchar(45) NOT NULL, '+
+            'preco float(4,2) NOT NULL, '+
+            'imagem text, ' +
+            'PRIMARY KEY (id) '+
           ');',
 
-          'CREATE TABLE IF NOT EXISTS DRINKS'+
+          'CREATE TABLE IF NOT EXISTS comandas_bebidas'+
         '( '+
-            'iddrinks int NOT NULL AUTO_INCREMENT, '+
-            'tipoBebida varchar(45) NOT NULL, '+
-            'marcaBebida varchar(45) NOT NULL, '+
-            'teorAlcolico float(4,2) NOT NULL, '+
-            'preco float(4,2) NOT NULL, '+
-            'PRIMARY KEY (iddrinks) '+
+            'id int NOT NULL AUTO_INCREMENT, '+
+            'idComanda int NOT NULL, '+
+            'idBebida int NOT NULL, '+
+            'quantidade int, ' +
+            'PRIMARY KEY (id), '+
+            'CONSTRAINT FK_comandasBebidas_comandas FOREIGN KEY (idComanda)' +
+            'REFERENCES comandas(id), ' +
+            'CONSTRAINT FK_comandasBebidas FOREIGN KEY (idBebida)' +
+            'REFERENCES bebidas(id)' +
+          ');',
+
+          'CREATE TABLE IF NOT EXISTS comandas_comidas'+
+        '( '+
+            'id int NOT NULL AUTO_INCREMENT, '+
+            'idComanda int NOT NULL, '+
+            'idComida int NOT NULL, '+
+            'quantidade int,' +
+            'PRIMARY KEY (id), '+
+            'CONSTRAINT FK_comandasComidas_comandas FOREIGN KEY (idComanda)' +
+            'REFERENCES comandas(id), ' +
+            'CONSTRAINT FK_comandasComidas FOREIGN KEY (idComida)' +
+            'REFERENCES comidas(id)' +
           ');'
-
-
-
         ]
 
         tabelas.forEach(sql =>{
