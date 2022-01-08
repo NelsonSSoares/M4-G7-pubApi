@@ -8,7 +8,18 @@ class ComandasDAO {
 
     selectAllComandas = () => {
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM comandas`, (error, result) => {
+            this.conexao.query(`
+                select c.numero, (cb.quantidade * b.preco + cc.quantidade * co.preco) as total_pedido from comandas c
+                inner join comandas_bebidas cb
+                on c.id = cb.idComanda
+                inner join comandas_comidas cc
+                on c.id = cc.idComanda
+                inner join comidas co
+                on co.id = cc.idComida
+                inner join bebidas b
+                on b.id = cb.idBebida
+            `,
+            (error, result) => {
                 if (error) {
                     reject('Não foi possível carregar a lista de comandas.')
                 } else {
@@ -21,7 +32,18 @@ class ComandasDAO {
     selectComandaByID  = (id) => {
         return new Promise((resolve, reject) => {
             let comanda = {}
-            this.conexao.query(`SELECT * FROM comandas WHERE id = ?`, id,
+            this.conexao.query(`
+                select c.id, c.numero, (cb.quantidade * b.preco + cc.quantidade * co.preco) as total_pedido from comandas c
+                inner join comandas_bebidas cb
+                on c.id = cb.idComanda
+                inner join comandas_comidas cc
+                on c.id = cc.idComanda
+                inner join comidas co
+                on co.id = cc.idComida
+                inner join bebidas b
+                on b.id = cb.idBebida
+                WHERE c.id = ?`,
+            id,
             async (error,result) => {
                 comanda = result[0]
 
