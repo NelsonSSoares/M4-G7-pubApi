@@ -9,14 +9,16 @@ class ComandasDAO {
     selectAllComandas = () => {
         return new Promise((resolve, reject) => {
             this.conexao.query(`
-                select c.numero, (cb.quantidade * b.preco + cc.quantidade * co.preco) as total_pedido from comandas c
-                inner join comandas_bebidas cb
+                select c.numero,
+                (coalesce(cb.quantidade, 0) * coalesce(b.preco, 0) + coalesce(cc.quantidade, 0) * coalesce(co.preco, 0)) as total_pedido
+                from comandas c
+                left join comandas_bebidas cb
                 on c.id = cb.idComanda
-                inner join comandas_comidas cc
+                left join comandas_comidas cc
                 on c.id = cc.idComanda
-                inner join comidas co
+                left join comidas co
                 on co.id = cc.idComida
-                inner join bebidas b
+                left join bebidas b
                 on b.id = cb.idBebida
             `,
             (error, result) => {
