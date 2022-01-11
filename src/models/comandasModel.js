@@ -1,4 +1,4 @@
-const ComandasDAO = require('../dao/ComandasDAO')
+const ComandasDAO = require('../dao/comandasDAO')
 
 class ComandasModel {
 
