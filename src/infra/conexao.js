@@ -1,15 +1,15 @@
 const mysql = require('mysql')
 
 const conexao = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'us-cdbr-east-05.cleardb.net',
     port: 3306,
-    user: 'root',
-    password: 'root',
-    database: 'pubapi'
+    user: 'bf7ea32b964f6e',
+    password: 'fcff59b2',
+    database: 'heroku_ddc5431a75b24f4'
 })
 
 setInterval(function () {
-    connection.query('SELECT 1');
+    conexao.query('SELECT 1');
 }, 5000);
 
 module.exports = conexao

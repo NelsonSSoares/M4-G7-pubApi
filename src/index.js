@@ -11,6 +11,7 @@ conexao.connect((erro) => {
         Tabelas.init(conexao)
         const app = customExpress()
 
-        app.listen(process.env.PORT || 3001, () => console.log('servidor rodando na porta 3001'))
+        const port = process.env.PORT || 3001
+        app.listen(port, () => console.log('servidor rodando na porta 3001'))
     }
 })
