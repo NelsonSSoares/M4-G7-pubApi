@@ -9,7 +9,7 @@ class ComandasDAO {
     selectAllComandas = () => {
         return new Promise((resolve, reject) => {
             this.conexao.query(`
-                select c.numero,
+                select c.numero, c.id,
                 (coalesce(cb.quantidade, 0) * coalesce(b.preco, 0) + coalesce(cc.quantidade, 0) * coalesce(co.preco, 0)) as total_pedido
                 from comandas c
                 left join comandas_bebidas cb
