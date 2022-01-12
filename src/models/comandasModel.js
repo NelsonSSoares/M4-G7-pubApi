@@ -57,14 +57,14 @@ class ComandasModel {
         const id = req.params.id
 
         try {
-            const comanda = await ComandasDAO.selectComandaByID(id)
+            // const comanda = await ComandasDAO.selectComandaByID(id)
 
-            if (comanda) {
-                const result = await ComandasDAO.deleteComanda(id)
-                res.status(200).json({ msg: result })
-            } else {
-                res.status(404).json({ msg: 'Comanda não encontrada.' })
-            }
+            const result = await ComandasDAO.deleteComanda(id)
+            res.status(200).json({ msg: result })
+            // if (comanda) {
+            // } else {
+            //     res.status(404).json({ msg: 'Comanda não encontrada.' })
+            // }
         } catch (error) {
             res.status(500).json({ erro: error })
         }

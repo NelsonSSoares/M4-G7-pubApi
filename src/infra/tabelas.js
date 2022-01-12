@@ -65,9 +65,9 @@ class Tabelas {
             'quantidade int, ' +
             'PRIMARY KEY (id), '+
             'CONSTRAINT FK_comandasBebidas_comandas FOREIGN KEY (idComanda)' +
-            'REFERENCES comandas(id), ' +
+            'REFERENCES comandas(id) ON DELETE CASCADE, ' +
             'CONSTRAINT FK_comandasBebidas FOREIGN KEY (idBebida)' +
-            'REFERENCES bebidas(id)' +
+            'REFERENCES bebidas(id) ON DELETE CASCADE' +
           ');',
 
           'CREATE TABLE IF NOT EXISTS comandas_comidas'+
@@ -78,9 +78,9 @@ class Tabelas {
             'quantidade int,' +
             'PRIMARY KEY (id), '+
             'CONSTRAINT FK_comandasComidas_comandas FOREIGN KEY (idComanda)' +
-            'REFERENCES comandas(id), ' +
+            'REFERENCES comandas(id) ON DELETE CASCADE, ' +
             'CONSTRAINT FK_comandasComidas FOREIGN KEY (idComida)' +
-            'REFERENCES comidas(id)' +
+            'REFERENCES comidas(id) ON DELETE CASCADE' +
           ');'
         ]
 
