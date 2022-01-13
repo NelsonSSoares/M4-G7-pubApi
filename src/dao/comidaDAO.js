@@ -19,7 +19,7 @@ class ComidaDAO{
 
     selectComidaById(id){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`SELECT * FROM comidas WHERE idcomida = ?`, id,
+            this.conexao.query(`SELECT * FROM comidas WHERE id = ?`, id,
             (error,result) => {
                 if (error) {
                     reject('Comida não encontrada');
