@@ -47,7 +47,7 @@ class ComidaDAO{
     updateComida(id, comida){
         console.log(id)
         return new Promise((resolve, reject) => {
-            this.conexao.query(`UPDATE comidas SET nome = ? , preco = ?, descricao = ?, imagem = ?  WHERE id = ?`, [ comida.nome, comida.descricao, comida.preco, comida.imagem, id  ],
+            this.conexao.query(`UPDATE comidas SET nome = ? , descricao = ?, preco = ?, , imagem = ?  WHERE id = ?`, [ comida.nome, comida.descricao, comida.preco, comida.imagem, id  ],
             (error) => {
                 if (error) {
                     reject('Erro ao atualizar: ' + error)
@@ -60,7 +60,7 @@ class ComidaDAO{
 
     deleteComida(id){
         return new Promise((resolve, reject) => {
-            this.conexao.query(`DELETE FROM comidas WHERE idcomida = ?`, id , (error) => {
+            this.conexao.query(`DELETE FROM comidas WHERE id = ?`, id , (error) => {
                 if (error) {
                     reject('Erro ao deletar: ' + error)
                 } else {
